@@ -10,7 +10,7 @@ function Nav() {
         <img className="logoImg" src={logo} alt="logo" />
       </div>
       <div className="navBar-Link">
-        <Link className="link" to="/">Home</Link>
+        <Link className="link" to="/">Movies</Link>
         <Link className="link" to="/watchList">WatchList</Link>
         <Link className="link" to="/Login">Login</Link>
       </div>
