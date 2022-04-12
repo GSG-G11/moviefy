@@ -1,11 +1,9 @@
 import React from 'react';
 
-function Nav(props) {
-    return (
-        <div>
-            
-        </div>
-    );
+function Nav() {
+  return (
+    <div />
+  );
 }
 
 export default Nav;
