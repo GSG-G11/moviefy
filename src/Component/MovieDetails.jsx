@@ -1,11 +1,9 @@
 import React from 'react';
 
-function MovieDetails(props) {
-    return (
-        <div>
-            
-        </div>
-    );
+function MovieDetails() {
+  return (
+    <div />
+  );
 }
 
 export default MovieDetails;
