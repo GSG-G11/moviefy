@@ -1,0 +1,39 @@
+.DetailsContainer{
+    padding:50px 100px;
+    display: flex;
+   
+}
+.imgDetails{
+    width: 300px;
+    height: 400px;
+    background-color: #f5f5f5;
+}
+.Details{
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+   
+}
+.Details p ,h2{
+    margin: 0;
+    letter-spacing: .5px;
+    line-height: 1.5;
+}
+.Details h4{
+    align-self: center;
+    color: #28a745;
+}
+.detailsHeader{
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.addBtn{
+    border: none;
+    border-radius: 5px;
+    padding:10px;
+    background-color: #28a745;
+    color:#fff;
+    font-size: medium;
+    margin: 30px 0 40px 0;
+}
