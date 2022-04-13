@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './css/MovieDetails.css';
+import MovieContext from '../assets/context/moviesContext';
 
-function MovieDetails({ movies, watchList, updateWatchList }) {
+function MovieDetails() {
+  const {
+    movies, updateWatchList, watchList,
+  } = React.useContext(MovieContext);
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const ImgApi = 'https://image.tmdb.org/t/p/w1280';
@@ -52,27 +55,5 @@ function MovieDetails({ movies, watchList, updateWatchList }) {
     </div>
   );
 }
-MovieDetails.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number.isRequired,
-  })),
-  updateWatchList: PropTypes.func.isRequired,
-  watchList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number.isRequired,
-  })),
-};
-MovieDetails.defaultProps = {
-  movies: [],
-  watchList: [],
-
-};
 
 export default MovieDetails;

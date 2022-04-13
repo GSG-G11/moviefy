@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './css/movieCard.css';
 import Pagenation from './Pagenation';
+import MovieContext from '../assets/context/moviesContext';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
-function MovieCard({
-  data, setPage, fromWatchList, updateWatchList,
-}) {
+function MovieCard({ fromWatchList, data }) {
+  const {
+    setPage, updateWatchList,
+  } = React.useContext(MovieContext);
   return (
     data.length
       ? (
@@ -50,8 +52,6 @@ function MovieCard({
 
 MovieCard.propTypes = {
   fromWatchList: PropTypes.bool.isRequired,
-  updateWatchList: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -60,8 +60,8 @@ MovieCard.propTypes = {
     vote_average: PropTypes.number.isRequired,
   })),
 };
+
 MovieCard.defaultProps = {
   data: [{}],
 };
-
 export default MovieCard;

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Nav from './Component/Nav';
-import MovieCard from './Component/MovieCard';
+// import MovieCard from './Component/MovieCard';
 import MovieDetails from './Component/MovieDetails';
-import WatchList from './Component/WatchList';
+import MovieContext from './assets/context/moviesContext';
+import Home from './Component/Home';
+import WatchListComp from './Component/WatchListComp';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -32,17 +34,25 @@ function App() {
     localStorage.setItem('watchList', JSON.stringify(moviesArr));
     setWatchList(moviesArr);
   };
+  const value = React.useMemo(() => ({
+    movies, setPage, watchList, updateWatchList,
+  }), [movies, watchList, page]);
+
   return (
+
     <BrowserRouter>
       <div>
         <Nav setMovies={setMovies} />
-        <Routes>
-          <Route path="/" element={<MovieCard data={movies} setPage={setPage} watchList={watchList} />} />
-          <Route path="/movie/:movieId" element={<MovieDetails movies={movies} updateWatchList={updateWatchList} watchList={watchList} />} />
-          <Route path="/watchList" element={<WatchList data={watchList} setPage={setPage} watchList={watchList} updateWatchList={updateWatchList} />} />
-        </Routes>
+        <MovieContext.Provider value={value}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:movieId" element={<MovieDetails />} />
+            <Route path="/watchList" element={<WatchListComp />} />
+          </Routes>
+        </MovieContext.Provider>
       </div>
     </BrowserRouter>
+
   );
 }
 
