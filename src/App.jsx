@@ -5,16 +5,15 @@ import MovieCard from './Component/MovieCard';
 import MovieDetails from './Component/MovieDetails';
 import WatchList from './Component/WatchList';
 
-const API_LINK = 'https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=1';
+const API_LINK = 'https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=4';
 function App() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
 
   useEffect(
     () => {
-      const watchListforStorge = JSON.parse(localStorage.getItem('watchList'));
-      console.log(watchList);
-      setWatchList(watchListforStorge);
+      const watchListForStorge = JSON.parse(localStorage.getItem('watchList'));
+      setWatchList(watchListForStorge);
       fetch(API_LINK)
         .then((res) => res.json())
         .then(({ results }) => setMovies(results))
@@ -25,14 +24,10 @@ function App() {
   const updateWatchList = (movieDetails) => {
     setWatchList([...watchList, movieDetails]);
   };
-  /* useEffect(() => {
-    localStorage.setItem('watchList', JSON.stringify(watchList));
-  }, [watchList]);
-  console.log('the watch', watchList); */
   return (
     <BrowserRouter>
       <div>
-        <Nav />
+        <Nav setMovies={setMovies} />
         <Routes>
           <Route path="/" element={<MovieCard data={movies} />} />
           <Route path="/movie/:movieId" element={<MovieDetails movies={movies} updateWatchList={updateWatchList} />} />

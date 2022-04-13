@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 
 function WatchList({ watchList }) {
-  console.log(watchList);
   return (
     <MovieCard data={watchList} />
   );
