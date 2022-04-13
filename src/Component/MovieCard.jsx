@@ -5,7 +5,9 @@ import './css/movieCard.css';
 import Pagenation from './Pagenation';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
-function MovieCard({ data, setPage }) {
+function MovieCard({
+  data, setPage, fromWatchList, updateWatchList,
+}) {
   return (
     data.length
       ? (
@@ -22,10 +24,24 @@ function MovieCard({ data, setPage }) {
               </div>
               <h5 className="title_movie">{title}</h5>
               <p className="vote_average">{voteAverage}</p>
+              {fromWatchList
+                ? (
+                  <button
+                    className="removeFromListBtn"
+                    type="submit"
+                    onClick={() => updateWatchList(data.filter((item) => item.id !== id))}
+                  >
+                    Remove From Watch List
+                  </button>
+                )
+                : null}
             </div>
 
           ))}
-          <Pagenation setPage={setPage} />
+
+          {!fromWatchList
+            ? <Pagenation setPage={setPage} />
+            : null}
         </div>
       )
       : <p className="no-result">NO Results Found</p>
@@ -33,6 +49,8 @@ function MovieCard({ data, setPage }) {
 }
 
 MovieCard.propTypes = {
+  fromWatchList: PropTypes.bool.isRequired,
+  updateWatchList: PropTypes.func.isRequired,
   setPage: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

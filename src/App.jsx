@@ -14,8 +14,7 @@ function App() {
     () => {
       const API_LINK = `https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=${page}`;
       const watchListforStorge = JSON.parse(localStorage.getItem('watchList')) || [];
-
-      console.log(watchListforStorge);
+      setWatchList(watchListforStorge);
       fetch(API_LINK)
         .then((res) => res.json())
         .then(({ results }) => setMovies(results))
@@ -23,20 +22,19 @@ function App() {
     },
     [page],
   );
-  const updateWatchList = (movieDetails) => {
-    console.log(movieDetails);
-    setWatchList([...watchList, movieDetails]);
 
-    localStorage.setItem('watchList', JSON.stringify(watchList));
+  const updateWatchList = (moviesArr) => {
+    localStorage.setItem('watchList', JSON.stringify(moviesArr));
+    setWatchList(moviesArr);
   };
   return (
     <BrowserRouter>
       <div>
         <Nav setMovies={setMovies} />
         <Routes>
-          <Route path="/" element={<MovieCard data={movies} setPage={setPage} />} />
-          <Route path="/movie/:movieId" element={<MovieDetails movies={movies} updateWatchList={updateWatchList} />} />
-          <Route path="/watchList" element={<WatchList watchList={watchList} setPage={setPage} />} />
+          <Route path="/" element={<MovieCard data={movies} setPage={setPage} watchList={watchList} />} />
+          <Route path="/movie/:movieId" element={<MovieDetails movies={movies} updateWatchList={updateWatchList} watchList={watchList} />} />
+          <Route path="/watchList" element={<WatchList data={watchList} setPage={setPage} watchList={watchList} updateWatchList={updateWatchList} />} />
         </Routes>
       </div>
     </BrowserRouter>
