@@ -26,8 +26,11 @@ function MovieCard({ fromWatchList, data }) {
                     <Image src={ImgApi + path} alt={title} />
                   </Link>
                 </div>
-                <h5 className="title_movie">{title}</h5>
-                <p className="vote_average">{voteAverage}</p>
+                <div className="footer">
+                  <h5 className="title_movie">{title}</h5>
+                  <p className="vote_average">{voteAverage}</p>
+                </div>
+
                 {fromWatchList
                   ? (
                     <Button

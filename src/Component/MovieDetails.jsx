@@ -27,7 +27,7 @@ function MovieDetails() {
           <h2>
             {movieDetails.title}
           </h2>
-          <p>{movieDetails.vote_average}</p>
+          <p className="vote">{movieDetails.vote_average}</p>
         </div>
         { watchList.find((item) => item.id === movieDetails.id)
           ? (

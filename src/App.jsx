@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import MovieContext from './context/moviesContext';
 import {
-  Nav, MovieDetails, Home, WatchListComp,
+  Nav, MovieDetails, Home, WatchListComp, Login,
 } from './Component';
 import NotFound from './Component/Errors/404';
 
@@ -11,6 +11,7 @@ function App() {
   const [watchList, setWatchList] = useState([]);
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(
     () => {
@@ -35,9 +36,9 @@ function App() {
     setWatchList(moviesArr);
   };
   const value = React.useMemo(() => ({
-    movies, setPage, watchList, updateWatchList, loader,
-  }), [movies, watchList, page, loader]);
-
+    movies, setPage, watchList, updateWatchList, loader, setIsLogin, isLogin,
+  }), [movies, watchList, page, loader, isLogin]);
+  console.log(isLogin);
   return (
 
     <BrowserRouter>
@@ -49,6 +50,7 @@ function App() {
             <Route path="/movie/:movieId" element={<MovieDetails />} />
             <Route path="/watchList" element={<WatchListComp />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </MovieContext.Provider>
       </div>
