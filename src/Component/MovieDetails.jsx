@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './css/MovieDetails.css';
 
-function MovieDetails({ movies }) {
+function MovieDetails({ movies, updateWatchList }) {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const ImgApi = 'https://image.tmdb.org/t/p/w1280';
+
   useEffect(() => {
     const Details = movies.find(({ id }) => id === Number(movieId));
     setMovieDetails(Details);
   }, []);
-  console.log(movieDetails);
   return (
 
     <div className="DetailsContainer">
@@ -25,7 +25,7 @@ function MovieDetails({ movies }) {
           </h2>
           <p>{movieDetails.vote_average}</p>
         </div>
-        <button className="addBtn" type="submit" onClick={() => console.log('h')}>Add to my WatchList</button>
+        <button className="addBtn" type="submit" onClick={() => updateWatchList(movieDetails)}>Add to my WatchList</button>
 
         {/* backdrop_path */}
         <p>{movieDetails.overview}</p>
@@ -48,9 +48,11 @@ MovieDetails.propTypes = {
     overview: PropTypes.string,
     vote_average: PropTypes.number.isRequired,
   })),
+  updateWatchList: PropTypes.func.isRequired,
 };
 MovieDetails.defaultProps = {
-  movies: [{}],
+  movies: [],
+
 };
 
 export default MovieDetails;

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './css/movieCard.css';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
 function MovieCard({ data }) {
-  const navigation = useNavigate();
   return (
     <div className="container">
       {data.map(({
@@ -13,15 +12,15 @@ function MovieCard({ data }) {
       }) => (
 
         <div key={id} className="movieCard">
-
           <div className="cardImg">
-            <img src={ImgApi + path} alt={title} />
+            <Link to={`/movie/${id}`}>
+              <img src={ImgApi + path} alt={title} />
+            </Link>
           </div>
           <h5 className="title_movie">{title}</h5>
           <p className="vote_average">{voteAverage}</p>
-          <button type="submit" onClick={() => navigation(`/movie/${id}`)}>more</button>
-
         </div>
+
       ))}
     </div>
   );
