@@ -6,6 +6,7 @@ import MovieDetails from './Component/MovieDetails';
 import MovieContext from './assets/context/moviesContext';
 import Home from './Component/Home';
 import WatchListComp from './Component/WatchListComp';
+import NotFound from './Component/Errors/404';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -49,6 +50,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/movie/:movieId" element={<MovieDetails />} />
             <Route path="/watchList" element={<WatchListComp />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </MovieContext.Provider>
       </div>
