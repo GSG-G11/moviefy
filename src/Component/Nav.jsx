@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 import './css/Nav.css';
+import { Image, Input } from '../eleComponent';
 
 function Nav({ setMovies }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,11 +25,11 @@ function Nav({ setMovies }) {
   return (
     <nav className="navBar">
       <div className="logo">
-        <img className="logoImg" src={logo} alt="logo" />
+        <Image className="logoImg" src={logo} alt="logo" />
         <p className="logo-name">Moviefy</p>
       </div>
       <form className="form-search" onSubmit={handleOnSubmit}>
-        <input onChange={handleOnChange} value={searchTerm} type="text" placeholder="Search by movie title" />
+        <Input onChange={handleOnChange} value={searchTerm} placeholder="Search by movie title" />
       </form>
       <div className="navBar-Link">
         <Link className="link" to="/">Movies</Link>

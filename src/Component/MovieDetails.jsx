@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './css/MovieDetails.css';
-import MovieContext from '../assets/context/moviesContext';
+import { Button, Image } from '../eleComponent';
+import MovieContext from '../context/moviesContext';
 
 function MovieDetails() {
   const {
@@ -19,7 +20,7 @@ function MovieDetails() {
 
     <div className="DetailsContainer">
       <div>
-        <img className="imgDetails" src={(ImgApi + movieDetails.poster_path) || ''} alt={movieDetails.title} />
+        <Image className="imgDetails" src={(ImgApi + movieDetails.poster_path) || ''} alt={movieDetails.title} />
       </div>
       <div className="Details">
         <div className="detailsHeader">
@@ -30,17 +31,15 @@ function MovieDetails() {
         </div>
         { watchList.find((item) => item.id === movieDetails.id)
           ? (
-            <button
+            <Button
               className="removeBtn"
-              type="submit"
-              onClick={() => {
+              handleFunc={() => {
                 updateWatchList(watchList.filter((item) => item.id !== movieDetails.id));
               }}
-            >
-              Remove from my WatchLis
-            </button>
+              title=" Remove from my WatchLis"
+            />
           )
-          : <button className="addBtn" type="submit" onClick={() => updateWatchList([...watchList, movieDetails])}>Add to my WatchList</button>}
+          : <Button className="addBtn" type="submit" handleFunc={() => updateWatchList([...watchList, movieDetails])} title="Add to my WatchList" />}
 
         {/* backdrop_path */}
         <p>{movieDetails.overview}</p>

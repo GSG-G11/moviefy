@@ -1,10 +1,9 @@
 import React from 'react';
 import MovieCard from './MovieCard';
-import MovieContext from '../assets/context/moviesContext';
+import MovieContext from '../context/moviesContext';
 
 function Home() {
   const { movies, loader } = React.useContext(MovieContext);
-
   return (
     <div>
       {loader ? (

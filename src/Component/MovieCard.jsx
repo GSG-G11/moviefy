@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './css/movieCard.css';
+import MovieContext from '../context/moviesContext';
 import Pagenation from './Pagenation';
-import MovieContext from '../assets/context/moviesContext';
+import './css/movieCard.css';
+import { Button, Image } from '../eleComponent';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
 function MovieCard({ fromWatchList, data }) {
@@ -13,39 +14,39 @@ function MovieCard({ fromWatchList, data }) {
   return (
     data.length
       ? (
-        <div className="container">
-          {data.map(({
-            title, id, vote_average: voteAverage, poster_path: path,
-          }) => (
+        <div>
+          <div className="container">
+            {data.map(({
+              title, id, vote_average: voteAverage, poster_path: path,
+            }) => (
 
-            <div key={id} className="movieCard">
-              <div className="cardImg">
-                <Link to={`/movie/${id}`}>
-                  <img src={ImgApi + path} alt={title} />
-                </Link>
+              <div key={id} className="movieCard">
+                <div className="cardImg">
+                  <Link to={`/movie/${id}`}>
+                    <Image src={ImgApi + path} alt={title} />
+                  </Link>
+                </div>
+                <h5 className="title_movie">{title}</h5>
+                <p className="vote_average">{voteAverage}</p>
+                {fromWatchList
+                  ? (
+                    <Button
+                      className="removeFromListBtn"
+                      type="submit"
+                      title="Remove From Watch List"
+                      handleFunc={() => updateWatchList(data.filter((item) => item.id !== id))}
+                    />
+
+                  )
+                  : null}
               </div>
-              <h5 className="title_movie">{title}</h5>
-              <p className="vote_average">{voteAverage}</p>
-              {fromWatchList
-                ? (
-                  <button
-                    className="removeFromListBtn"
-                    type="submit"
-                    onClick={() => updateWatchList(data.filter((item) => item.id !== id))}
-                  >
-                    Remove From Watch List
-                  </button>
-                )
-                : null}
-            </div>
 
-          ))}
+            ))}
 
-          {!fromWatchList
-            ? (
-              <Pagenation setPage={setPage} />
-            )
-            : null}
+            {!fromWatchList
+              ? <Pagenation setPage={setPage} />
+              : null}
+          </div>
         </div>
       )
       : (
