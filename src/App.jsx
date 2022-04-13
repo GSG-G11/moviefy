@@ -34,16 +34,16 @@ function App() {
     localStorage.setItem('watchList', JSON.stringify(moviesArr));
     setWatchList(moviesArr);
   };
+  const value = React.useMemo(() => ({
+    movies, setPage, watchList, updateWatchList,
+  }), [movies, watchList, page]);
 
   return (
 
     <BrowserRouter>
       <div>
         <Nav setMovies={setMovies} />
-        <MovieContext.Provider value={{
-          movies, setPage, watchList, updateWatchList,
-        }}
-        >
+        <MovieContext.Provider value={value}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie/:movieId" element={<MovieDetails />} />
