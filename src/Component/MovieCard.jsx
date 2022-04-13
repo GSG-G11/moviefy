@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './css/movieCard.css';
+import Pagenation from './Pagenation';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
-function MovieCard({ data }) {
+function MovieCard({ data, setPage }) {
   return (
     data.length
       ? (
@@ -24,6 +25,7 @@ function MovieCard({ data }) {
             </div>
 
           ))}
+          <Pagenation setPage={setPage} />
         </div>
       )
       : <p className="no-result">NO Results Found</p>
@@ -31,6 +33,7 @@ function MovieCard({ data }) {
 }
 
 MovieCard.propTypes = {
+  setPage: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
