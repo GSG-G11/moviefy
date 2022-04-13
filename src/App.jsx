@@ -11,6 +11,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
   const [page, setPage] = useState(1);
+  const [loader, setLoader] = useState(true);
 
   useEffect(
     () => {
@@ -21,7 +22,7 @@ function App() {
       setWatchList(watchListforStorge);
       fetch(API_LINK, { signal })
         .then((res) => res.json())
-        .then(({ results }) => setMovies(results))
+        .then(({ results }) => { setMovies(results); setLoader(false); })
         .catch((err) => console.log(err));
       return () => {
         controller.abort();
@@ -35,8 +36,8 @@ function App() {
     setWatchList(moviesArr);
   };
   const value = React.useMemo(() => ({
-    movies, setPage, watchList, updateWatchList,
-  }), [movies, watchList, page]);
+    movies, setPage, watchList, updateWatchList, loader,
+  }), [movies, watchList, page, loader]);
 
   return (
 

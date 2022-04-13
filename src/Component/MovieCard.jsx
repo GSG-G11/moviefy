@@ -42,17 +42,16 @@ function MovieCard({ fromWatchList, data }) {
           ))}
 
           {!fromWatchList
-            ? <Pagenation setPage={setPage} />
+            ? (
+              <Pagenation setPage={setPage} />
+            )
             : null}
         </div>
       )
       : (
-        <>
-          <p className="no-result">NO Results Found</p>
-          <div className="container">
-            <div className="loader" />
-          </div>
-        </>
+
+        <p className="no-result">NO Results Found</p>
+
       )
   );
 }

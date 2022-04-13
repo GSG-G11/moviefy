@@ -3,11 +3,15 @@ import MovieCard from './MovieCard';
 import MovieContext from '../assets/context/moviesContext';
 
 function Home() {
-  const { movies } = React.useContext(MovieContext);
+  const { movies, loader } = React.useContext(MovieContext);
 
   return (
     <div>
-      <MovieCard data={movies} fromWatchList={false} />
+      {loader ? (
+        <div className="container">
+          <div className="loader" />
+        </div>
+      ) : <MovieCard data={movies} fromWatchList={false} />}
     </div>
   );
 }
