@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './css/movieCard.css';
 import Pagenation from './Pagenation';
+import MovieContext from '../assets/context/moviesContext';
 
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
-function MovieCard({ data, setPage }) {
+function MovieCard({ fromWatchList, data }) {
+  const {
+    setPage, updateWatchList,
+  } = React.useContext(MovieContext);
   return (
     data.length
       ? (
@@ -22,10 +26,24 @@ function MovieCard({ data, setPage }) {
               </div>
               <h5 className="title_movie">{title}</h5>
               <p className="vote_average">{voteAverage}</p>
+              {fromWatchList
+                ? (
+                  <button
+                    className="removeFromListBtn"
+                    type="submit"
+                    onClick={() => updateWatchList(data.filter((item) => item.id !== id))}
+                  >
+                    Remove From Watch List
+                  </button>
+                )
+                : null}
             </div>
 
           ))}
-          <Pagenation setPage={setPage} />
+
+          {!fromWatchList
+            ? <Pagenation setPage={setPage} />
+            : null}
         </div>
       )
       : (
@@ -40,7 +58,7 @@ function MovieCard({ data, setPage }) {
 }
 
 MovieCard.propTypes = {
-  setPage: PropTypes.func.isRequired,
+  fromWatchList: PropTypes.bool.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -49,8 +67,8 @@ MovieCard.propTypes = {
     vote_average: PropTypes.number.isRequired,
   })),
 };
+
 MovieCard.defaultProps = {
   data: [{}],
 };
-
 export default MovieCard;
