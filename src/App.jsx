@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Nav from './Component/Nav';
-// import MovieCard from './Component/MovieCard';
-import MovieDetails from './Component/MovieDetails';
-import MovieContext from './assets/context/moviesContext';
-import Home from './Component/Home';
-import WatchListComp from './Component/WatchListComp';
+import MovieContext from './context/moviesContext';
+import {
+  Nav, MovieDetails, Home, WatchListComp,
+} from './Component';
 
 function App() {
   const [movies, setMovies] = useState([]);
