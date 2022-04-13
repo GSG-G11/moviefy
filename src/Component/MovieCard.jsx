@@ -28,7 +28,14 @@ function MovieCard({ data, setPage }) {
           <Pagenation setPage={setPage} />
         </div>
       )
-      : <p className="no-result">NO Results Found</p>
+      : (
+        <>
+          <p className="no-result">NO Results Found</p>
+          <div className="container">
+            <div className="loader" />
+          </div>
+        </>
+      )
   );
 }
 
