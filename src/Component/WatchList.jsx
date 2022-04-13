@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 
-function WatchList({ watchList }) {
+function WatchList({ watchList, setPage }) {
   return (
-    <MovieCard data={watchList} />
+    <MovieCard data={watchList} setPage={setPage} />
   );
 }
 
 WatchList.propTypes = {
+  setPage: PropTypes.func.isRequired,
   watchList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
