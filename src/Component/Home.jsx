@@ -3,8 +3,16 @@ import MovieCard from './MovieCard';
 import MovieContext from '../context/moviesContext';
 
 function Home() {
-  const { movies } = React.useContext(MovieContext);
-  return <MovieCard data={movies} fromWatchList={false} />;
+  const { movies, loader } = React.useContext(MovieContext);
+  return (
+    <div>
+      {loader ? (
+        <div className="container">
+          <div className="loader" />
+        </div>
+      ) : <MovieCard data={movies} fromWatchList={false} />}
+    </div>
+  );
 }
 
 export default Home;

@@ -49,7 +49,11 @@ function MovieCard({ fromWatchList, data }) {
           </div>
         </div>
       )
-      : <p className="no-result">NO Results Found</p>
+      : (
+
+        <p className="no-result">NO Results Found</p>
+
+      )
   );
 }
 
