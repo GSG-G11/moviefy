@@ -6,23 +6,27 @@ import './css/movieCard.css';
 const ImgApi = 'https://image.tmdb.org/t/p/w1280';
 function MovieCard({ data }) {
   return (
-    <div className="container">
-      {data.map(({
-        title, id, vote_average: voteAverage, poster_path: path,
-      }) => (
+    data.length
+      ? (
+        <div className="container">
+          {data.map(({
+            title, id, vote_average: voteAverage, poster_path: path,
+          }) => (
 
-        <div key={id} className="movieCard">
-          <div className="cardImg">
-            <Link to={`/movie/${id}`}>
-              <img src={ImgApi + path} alt={title} />
-            </Link>
-          </div>
-          <h5 className="title_movie">{title}</h5>
-          <p className="vote_average">{voteAverage}</p>
+            <div key={id} className="movieCard">
+              <div className="cardImg">
+                <Link to={`/movie/${id}`}>
+                  <img src={ImgApi + path} alt={title} />
+                </Link>
+              </div>
+              <h5 className="title_movie">{title}</h5>
+              <p className="vote_average">{voteAverage}</p>
+            </div>
+
+          ))}
         </div>
-
-      ))}
-    </div>
+      )
+      : <p className="no-result">NO Results Found</p>
   );
 }
 
