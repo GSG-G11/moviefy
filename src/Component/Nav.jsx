@@ -15,7 +15,10 @@ function Nav({ setMovies }) {
     e.preventDefault();
     if (searchTerm) {
       const API_SEARCH = `https://api.themoviedb.org/3/search/movie?&api_key=e4e72d82643e224bf78695be0b5602cd&query=${searchTerm}`;
-      fetch(API_SEARCH).then((res) => res.json()).then(({ results }) => setMovies(results));
+      fetch(API_SEARCH)
+        .then((res) => res.json())
+        .then(({ results }) => setMovies(results))
+        .catch((err) => console.log(err));
     }
   };
   return (
