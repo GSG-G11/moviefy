@@ -29,12 +29,12 @@ function Nav({ setMovies }) {
         <p className="logo-name">Moviefy</p>
       </div>
       <form className="form-search" onSubmit={handleOnSubmit}>
-        <Input onChange={handleOnChange} value={searchTerm} placeholder="Search by movie title" />
+        <Input type="text" onChange={handleOnChange} value={searchTerm} placeholder="Search by movie title" />
       </form>
       <div className="navBar-Link">
         <Link className="link" to="/">Movies</Link>
         <Link className="link" to="/watchList">WatchList</Link>
-        <Link className="link" to="/Login">Login</Link>
+        <Link className="link" to="/login">Login</Link>
       </div>
     </nav>
   );
