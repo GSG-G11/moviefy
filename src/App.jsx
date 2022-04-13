@@ -13,8 +13,9 @@ function App() {
   useEffect(
     () => {
       const API_LINK = `https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=${page}`;
-      const watchListForStorge = JSON.parse(localStorage.getItem('watchList'));
-      setWatchList(watchListForStorge);
+      const watchListforStorge = JSON.parse(localStorage.getItem('watchList')) || [];
+
+      console.log(watchListforStorge);
       fetch(API_LINK)
         .then((res) => res.json())
         .then(({ results }) => setMovies(results))
@@ -23,7 +24,10 @@ function App() {
     [page],
   );
   const updateWatchList = (movieDetails) => {
+    console.log(movieDetails);
     setWatchList([...watchList, movieDetails]);
+
+    localStorage.setItem('watchList', JSON.stringify(watchList));
   };
   return (
     <BrowserRouter>
@@ -32,7 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MovieCard data={movies} setPage={setPage} />} />
           <Route path="/movie/:movieId" element={<MovieDetails movies={movies} updateWatchList={updateWatchList} />} />
-          <Route path="/watchList" element={<WatchList watchList={watchList} />} />
+          <Route path="/watchList" element={<WatchList watchList={watchList} setPage={setPage} />} />
         </Routes>
       </div>
     </BrowserRouter>
