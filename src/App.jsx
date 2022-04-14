@@ -30,6 +30,7 @@ function App() {
         .catch((err) => console.log(err));
       return () => {
         controller.abort();
+        localStorage.setItem('isLogin', false);
       };
     },
     [page],
@@ -63,7 +64,7 @@ function App() {
             <Route path="/movie/:movieId" element={<MovieDetails />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
-            {console.log('here', isLogin)}
+
             <Route path="/watchList" element={<WatchListComp />} />
           </Routes>
         </MovieContext.Provider>

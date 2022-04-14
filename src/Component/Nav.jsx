@@ -10,7 +10,7 @@ function Nav() {
   const [searchTerm, setSearchTerm] = useState('');
   const {
     page,
-    setMovies, loader, setLoader, isLogin, setIsLogin,
+    setMovies, setLoader, isLogin, setIsLogin,
   } = React.useContext(MovieContext);
   const handleOnChange = ({ target }) => {
     setLoader(true);
@@ -18,8 +18,6 @@ function Nav() {
   };
 
   useEffect(() => {
-    console.log(loader);
-    console.log(searchTerm);
     const controller = new AbortController();
     const { signal } = controller;
     if (searchTerm) {
@@ -61,6 +59,7 @@ function Nav() {
       <div className="navBar-Link">
         <Link className="link" to="/">Movies</Link>
         <Link className="link" to="/watchList">WatchList</Link>
+
         {isLogin ? (
           <Button
             className="AuthBtn"
