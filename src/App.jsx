@@ -19,6 +19,8 @@ function App() {
       const { signal } = controller;
       const API_LINK = `https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=${page}`;
       const watchListforStorge = JSON.parse(localStorage.getItem('watchList')) || [];
+      const isLoginFromStorge = localStorage.getItem('isLogin');
+      setIsLogin(isLoginFromStorge);
       setWatchList(watchListforStorge);
       fetch(API_LINK, { signal })
         .then((res) => res.json())
