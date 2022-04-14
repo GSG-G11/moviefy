@@ -11,6 +11,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLogin(true);
+    localStorage.setItem('isLogin', true);
     navigate('/watchList');
   };
   return (

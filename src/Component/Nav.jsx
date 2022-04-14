@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 import MovieContext from '../context/moviesContext';
 import './css/Nav.css';
-import { Image, Input } from '../eleComponent';
+import { Image, Input, Button } from '../eleComponent';
 
 function Nav() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const {
     page,
-    setMovies, loader, setLoader,
+    setMovies, setLoader, isLogin, setIsLogin,
   } = React.useContext(MovieContext);
   const handleOnChange = ({ target }) => {
     setLoader(true);
@@ -18,8 +18,6 @@ function Nav() {
   };
 
   useEffect(() => {
-    console.log(loader);
-    console.log(searchTerm);
     const controller = new AbortController();
     const { signal } = controller;
     if (searchTerm) {
@@ -61,7 +59,18 @@ function Nav() {
       <div className="navBar-Link">
         <Link className="link" to="/">Movies</Link>
         <Link className="link" to="/watchList">WatchList</Link>
-        <Link className="link" to="/login">Log In</Link>
+
+        {isLogin ? (
+          <Button
+            className="AuthBtn"
+            title="Log out"
+            handleFunc={() => {
+              setIsLogin(false);
+              localStorage.setItem('isLogin', false);
+            }}
+          />
+        )
+          : (<Button className="AuthBtn" title="Log in" handleFunc={() => navigate('/login')} />)}
 
       </div>
     </nav>
