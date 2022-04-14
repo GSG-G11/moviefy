@@ -61,7 +61,7 @@ function Nav() {
       <div className="navBar-Link">
         <Link className="link" to="/">Movies</Link>
         <Link className="link" to="/watchList">WatchList</Link>
-        <Link className="link" to="/login">Log in</Link>
+        <Link className="link" to="/login">Log In</Link>
 
       </div>
     </nav>
