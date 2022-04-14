@@ -27,7 +27,7 @@ function App() {
         .then(({ results }) => {
           setMovies(results); setLoader(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log);
       return () => {
         controller.abort();
         localStorage.setItem('isLogin', false);
