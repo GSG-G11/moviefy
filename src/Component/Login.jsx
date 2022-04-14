@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MovieContext from '../context/moviesContext';
 import { Input, Button } from '../eleComponent';
 import './css/Login.css';
@@ -6,9 +7,11 @@ import './css/Login.css';
 function Login() {
   const [info, setInfo] = useState({ username: '', password: '' });
   const { setIsLogin } = React.useContext(MovieContext);
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLogin(true);
+    navigate('/watchList');
   };
   return (
     <div className="login-contanier">

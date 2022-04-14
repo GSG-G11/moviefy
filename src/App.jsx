@@ -22,7 +22,9 @@ function App() {
       setWatchList(watchListforStorge);
       fetch(API_LINK, { signal })
         .then((res) => res.json())
-        .then(({ results }) => { setMovies(results); setLoader(false); })
+        .then(({ results }) => {
+          setMovies(results); setLoader(false);
+        })
         .catch((err) => console.log(err));
       return () => {
         controller.abort();
@@ -36,21 +38,31 @@ function App() {
     setWatchList(moviesArr);
   };
   const value = React.useMemo(() => ({
-    movies, setPage, watchList, updateWatchList, loader, setIsLogin, isLogin,
+    movies,
+    setPage,
+    watchList,
+    updateWatchList,
+    loader,
+    setIsLogin,
+    isLogin,
+    setMovies,
+    setLoader,
+    page,
   }), [movies, watchList, page, loader, isLogin]);
-  console.log(isLogin);
   return (
 
     <BrowserRouter>
       <div>
-        <Nav setMovies={setMovies} />
+
         <MovieContext.Provider value={value}>
+          <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie/:movieId" element={<MovieDetails />} />
-            <Route path="/watchList" element={<WatchListComp />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
+            {console.log('here', isLogin)}
+            <Route path="/watchList" element={<WatchListComp />} />
           </Routes>
         </MovieContext.Provider>
       </div>
