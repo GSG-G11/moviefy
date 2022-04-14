@@ -30,7 +30,7 @@ function Nav() {
           setMovies(results);
           setLoader(false);
         })
-        .catch((err) => console.log(err));
+        .catch(console.log);
     } else {
       const API_SEARCH = `https://api.themoviedb.org/3/discover/movie?certification_country=US&certification=R&&api_key=e4e72d82643e224bf78695be0b5602cd&page=${page}`;
       fetch(API_SEARCH, { signal })
