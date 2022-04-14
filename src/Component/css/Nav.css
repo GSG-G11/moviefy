@@ -195,6 +195,15 @@
     }
 }
 
+.AuthBtn{
+    background-color: #28a745;
+   font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
 /* @media screen and (max-width: 600px) {
     .navBar-Link{
         font-size: 15px;
